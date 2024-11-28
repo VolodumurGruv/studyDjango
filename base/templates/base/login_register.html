@@ -1,0 +1,89 @@
+{% extends 'index.html' %} {% block content %}
+<div>
+  <div class="input-group mb-2">
+    {% if page == 'login' %}
+    <form method="POST" action="">
+      {% csrf_token %}
+      <label for="username">User name</label>
+      <input
+        type="text"
+        class="form-control"
+        name="username"
+        id="username"
+        placeholder="Enter Username"
+      />
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        class="form-control"
+      />
+      <input
+        type="submit"
+        class="btn btn-outline-secondary mt-2"
+        name="login"
+        value="login"
+      />
+    </form>
+  </div>
+  <div>
+    <p class="badge bg-opacity-25 fs-2 text-bg-info text-wrap mt-2">
+      Haven't signup yet?
+    </p>
+    <div>
+      <a class="btn btn-outline-secondary" href="{% url 'register' %}"
+        >Signup</a
+      >
+    </div>
+  </div>
+  {% else %}
+  <div class="input-group mb-2">
+    <form method="POST" action="">
+      {% csrf_token %} {{ form.as_p }}
+      <!--            <label for="name">User name</label>-->
+      <!--            <input-->
+      <!--                    type="text"-->
+      <!--                    class="form-control"-->
+      <!--                    id="name"-->
+      <!--                    name="name"-->
+      <!--                    placeholder="Enter Username"/>-->
+      <!--            <label for="email">E-mail</label>-->
+      <!--            <input-->
+      <!--                    type="email"-->
+      <!--                    class="form-control"-->
+      <!--                    id="email"-->
+      <!--                    name="email"-->
+      <!--                    placeholder="Enter e-mail"/>-->
+      <!--            <label for="reg-password">Password</label>-->
+      <!--            <input-->
+      <!--                    type="password"-->
+      <!--                    id="reg-password"-->
+      <!--                    name="password"-->
+      <!--                    class="form-control" >-->
+      <!--             <label for="conf-password">Confirm Password</label>-->
+      <!--            <input-->
+      <!--                    type="password"-->
+      <!--                    id="conf-password"-->
+      <!--                    name="conf-password"-->
+      <!--                    class="form-control" >-->
+      <input
+        type="submit"
+        class="btn btn-outline-secondary mt-2"
+        name="Registration"
+        value="Confirm"
+      />
+    </form>
+  </div>
+  <div>
+    <p class="badge bg-opacity-25 fs-2 text-bg-info text-wrap mt-2">
+      Already signup?
+    </p>
+    <div>
+      <a class="btn btn-outline-secondary" href="{% url 'login' %}">Login</a>
+    </div>
+  </div>
+
+  {% endif %}
+</div>
+{% endblock %}

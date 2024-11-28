@@ -1,0 +1,30 @@
+{% for room in rooms %} {% if request.user == room.host %}
+    <div>
+      <div>
+        <a
+          class="link-dark link-underline-opacity-25 link-underline-opacity-100-hover"
+          href="{% url 'update-room' room.id %}"
+          >Edit room</a
+        >
+      </div>
+      <div>
+        <a
+          class="link-underline-opacity-25 link-underline-opacity-100-hover link-danger"
+          href="{% url 'delete-room' room.id %}"
+          >Delete room</a
+        >
+      </div>
+    </div>
+    {% endif %}
+    <div>
+      <a href="{% url 'user-profile' room.host.id %}" class="link-primary">@{{ room.host.username }}</a>
+      <h5>{{ room.name }}</h5>
+      <a
+        class="link-dark link-underline-opacity-25 link-underline-opacity-100-hover"
+        href=" {% url 'room_id' room.id %} "
+        >{{ room.id }} <small>{{ room.topic.name}}</small></a
+      >
+
+      <hr />
+    </div>
+    {% endfor %}

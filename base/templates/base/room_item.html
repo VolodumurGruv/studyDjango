@@ -1,0 +1,58 @@
+{% extends 'index.html' %} {% block content %}
+<div class=" row">
+    <div class="col-9">
+        <h1>{{room.name}} - {{room.id}}</h1>
+        <div class="description">
+            <p>{{ room.description}}</p>
+        </div>
+        <div class="comment">
+            <h3>Conversation</h3>
+            <hr>
+            {% for message in room_msg %}
+        <!--    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">-->
+            {% if request.user == message.user %}
+            <a
+                class="btn btn-outline-danger mb-2"
+                href="{% url 'delete-message' message.id %}"
+            >
+                Delete
+            </a>
+            {% endif %}
+            <div class="toast-header">
+                <small>{{message.user}} {{message.created|timesince}} ago</small>
+            </div>
+            <div class="toast-body mb-2">
+                {{message.body}}
+            </div>
+        <!--    </div>-->
+            {% endfor %}
+        </div>
+        {% if request.user.is_authenticated %}
+        <div>
+            <form action="" method="POST" class="mt-2">
+                {% csrf_token %}
+                <div class="mb-2 input-group">
+                    <input
+                            class="form-control form-control-lg"
+                            type="text"
+                            name="body_msg"
+                            id="body_msg"
+                            placeholder="Leave a comment"
+                    >
+                </div>
+            </form>
+        </div>
+    {% endif %}
+    </div>
+    <div class="col-3">
+        <h3>Participants</h3>
+        {% for participant in participants %}
+            <div>
+<!--                you can get current user -->
+<!--                <p>@{{user.username}}</p>-->
+                <p> @{{ participant }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

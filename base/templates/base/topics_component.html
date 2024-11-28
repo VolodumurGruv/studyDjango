@@ -1,0 +1,15 @@
+<h3>Browse topics</h3>
+<a
+    class="link-underline-opacity-25 link-underline-opacity-100-hover link-dark"
+    href="{% url 'room' %}"
+>All rooms
+</a>
+{% for topic in topics %}
+<div style="padding-top: 5px; padding-bottom: 5px">
+    <a
+        class="link-dark link-underline-opacity-25 link-underline-opacity-100-hover"
+        href="{% url 'room' %}?q={{topic.name}}"
+    >{{ topic.name }}
+    </a>
+</div>
+{% endfor %}

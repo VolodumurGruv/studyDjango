@@ -1,0 +1,9 @@
+{% extends 'index.html' %} {% block content %}
+<div class="mt-2">
+  <form method="POST" action="">
+    <!--        prevent from malicious attack-->
+    {% csrf_token %} {{ form.as_p }}
+    <input type="submit" id="submit" />
+  </form>
+</div>
+{% endblock content %}
