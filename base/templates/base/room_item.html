@@ -1,34 +1,36 @@
 {% extends 'index.html' %} {% block content %}
-<div class=" row">
-    <div class="col-9">
+<div class="row mt-2 gap-2">
+    <div class="col-8 bg-body-secondary text-body card">
         <h1>{{room.name}} - {{room.id}}</h1>
-        <div class="description">
+        <div class="description card-header">
             <p>{{ room.description}}</p>
         </div>
-        <div class="comment">
+        <div class="comment card-body">
             <h3>Conversation</h3>
             <hr>
             {% for message in room_msg %}
-        <!--    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">-->
-            {% if request.user == message.user %}
-            <a
-                class="btn btn-outline-danger mb-2"
-                href="{% url 'delete-message' message.id %}"
-            >
-                Delete
-            </a>
-            {% endif %}
-            <div class="toast-header">
-                <small>{{message.user}} {{message.created|timesince}} ago</small>
+            <div class="card mt-2 mb-2 bg-body-secondary">
+                {% if request.user == message.user %}
+                {% endif %}
+                <div class="card-header">
+                    <small>{{message.user}} {{message.created|timesince}} ago</small>
+                </div>
+                <div class=" card-body mb-2">
+                    {{message.body}}
+                </div>
+                <div class="card-footer">
+                    <a
+                        class="btn btn-outline-danger mb-2 "
+                        href="{% url 'delete-message' message.id %}"
+                    >Delete
+                    </a>
+                </div>
             </div>
-            <div class="toast-body mb-2">
-                {{message.body}}
-            </div>
-        <!--    </div>-->
+
             {% endfor %}
         </div>
         {% if request.user.is_authenticated %}
-        <div>
+        <div class="mb-3"
             <form action="" method="POST" class="mt-2">
                 {% csrf_token %}
                 <div class="mb-2 input-group">
@@ -44,10 +46,10 @@
         </div>
     {% endif %}
     </div>
-    <div class="col-3">
-        <h3>Participants</h3>
+    <div class="col-3 card bg-body-secondary text-secondary">
+        <h3 class="card-header">Participants</h3>
         {% for participant in participants %}
-            <div>
+            <div class="card-footer">
 <!--                you can get current user -->
 <!--                <p>@{{user.username}}</p>-->
                 <p> @{{ participant }}</p>

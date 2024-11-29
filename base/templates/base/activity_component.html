@@ -1,18 +1,25 @@
 <!--reusable component-->
  <h3>Recent Activities</h3>
     {% for message in room_messages %}
-    <div class="mb-2">
-      <a href="{% url 'user-profile' message.user.id %}" class="link-primary"> @{{message.user}}</a>
-        <span> {{message.created|timesince}}</span>
-      <small>replied to "{{message.room}}"</small>
-      <p>{{message}}</p>
+    <div class="mb-2 bg-body-secondary card">
+        <div class="card-header">
+
+          <a href="{% url 'user-profile' message.user.id %}" class="link-primary"> @{{message.user}}</a>
+            <span> {{message.created|timesince}}</span>
+          <small>replied to "{{message.room}}"</small>
+        </div>
+        <div class="card-body">
+            <p>{{message}}</p>
+        </div>
        {% if request.user == message.user %}
+        <div class="card-footer">
             <a
                 class="btn btn-outline-danger mt-2"
                 href="{% url 'delete-message' message.id %}"
             >
                 Delete
             </a>
+        </div>
             {% endif %}
     </div>
     {% endfor %}

@@ -1,20 +1,22 @@
 {% extends 'index.html' %} {% block content %}
-<h1>Room</h1>
-<div class="rooms row">
-  <div class="col-2">
+<h1>Topics</h1>
+<div class="rooms rounded-5 row bg-body-secondary">
+  <div class="col-2 mt-3">
     <p>{{room_count}} room(s) available</p>
     <div>
       <a class="nav-link link-success" href="{% url 'create-room' %}"
         >Create topic
       </a>
     </div>
-        {% include 'base/topics_component.html' %}
+
+      {% include 'base/topics_component.html' %}
+
   </div>
 
-  <div class="room col-6">
+  <div class="room mt-3 col-7">
     {% include 'base/feed_component.html' %}
   </div>
-  <div class="col-4">
+  <div class="col-3 mt-3">
     {% include 'base/activity_component.html' %}
   </div>
 </div>

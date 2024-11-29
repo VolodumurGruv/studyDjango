@@ -1,5 +1,7 @@
+
 <div class="navbar navbar-expand-lg bg-body-secondary">
-  <div class="container-fluid">
+
+  <div class="container-fluid container">
     <button
       class="navbar-toggler"
       type="button"
@@ -11,7 +13,7 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbar">
+    <div class="collapse navbar-collapse gap-1" id="navbar">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link text-secondary-emphasis" href="/">Home</a>
@@ -37,9 +39,20 @@
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
       {% if request.user.is_authenticated %}
-      <p class="badge m-3 bg-opacity-25 fs-4 text-bg-primary text-wrap">
-        {{ request.user.username }}
-      </p>
+      <div class="dropdown">
+        <button
+          class="btn btn-outline-primary dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+        @{{ request.user.username }}
+        </button>
+        <ul class="dropdown-menu bg-body-secondary border-0">
+          <li><a href="" class="dropdown-item">Settings</a></li>
+          <li><a href="" class="dropdown-item">Account</a></li>
+        </ul>
+      </div>
       <div class="btn btn-outline-secondary">
         <a href="{% url 'logout' %}" class="nav-link">Logout</a>
       </div>
